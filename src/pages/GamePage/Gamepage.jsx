@@ -18,13 +18,19 @@ function Gamepage() {
     const [result, setResult] = useState('Lets Play')
 
     const handleInput = (e) => {
-        const value = e.target.value;
-        setNumber(value);
-        setButtonData('Start');
-        setCircles([]);
-        setResult('Lets Play')
-        if (timer) clearInterval(timer);
-        setTime(0);
+        if(e.target.value < 0 || e.target.value > 1000){
+            alert('Please enter a number between 0 and 1000.')
+        }
+        else{
+
+            const value = e.target.value;
+            setNumber(value);
+            setButtonData('Start');
+            setCircles([]);
+            setResult('Lets Play')
+            if (timer) clearInterval(timer);
+            setTime(0);
+        }
     };
 
     const handleStart = () => {
@@ -81,6 +87,7 @@ function Gamepage() {
                         className='p-2 ml-4 rounded-md border'
                         type='number'
                         min={0}
+                        max={1000}
                         pattern='/^\d+$/'
                         value={number}
                         placeholder='Input number'
@@ -101,7 +108,7 @@ function Gamepage() {
                 </button  >
 
 
-                <div className='relative mt-4 border rounded-md w-full h-[700px] border-gray-600 shadow-md overflow-hidden'>
+                <div className='relative mt-4 border rounded-md w-full h-[500px] border-gray-600 shadow-md overflow-hidden'>
                     {circles.map((pos, index) => (
                         <Circle
                             key={index}
